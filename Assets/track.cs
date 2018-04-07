@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class track : MonoBehaviour {
 
@@ -20,6 +21,7 @@ public class track : MonoBehaviour {
     public class mTrack
     {
         public GameObject finishLine;
+        public Text timer;
         public bool started = false;
         public bool goal = false;
         public bool finish = false;
@@ -119,6 +121,9 @@ public class track : MonoBehaviour {
                 startTime += Time.deltaTime;
                 enemyTime += Time.deltaTime;
 
+                // Send to timer
+                webTrack.timer.text = webTrack.remainingTime + " remaining";
+
                 // Calculate time left
                 webTrack.timeLeft = webTrack.completionTime - startTime;
                 webTrack.remainingTime = clockTime(webTrack.timeLeft);
@@ -132,7 +137,7 @@ public class track : MonoBehaviour {
         int minutes = (int)(timeInSeconds / 60);
         int hours = (int)(timeInSeconds / 3600);
 
-        string time = hours + "h:" + minutes + "m:" + seconds + "s time left";
+        string time = hours + "h:" + minutes + "m:" + seconds + "s time";
 
         return time;
     }
@@ -145,11 +150,6 @@ public class track : MonoBehaviour {
         newEnemy = Instantiate(enemy.types[newEnemyTypeIndex], 
                                 enemy.spawnZone.transform.position + Random.insideUnitSphere * enemy.spawnRadius, 
                                 Quaternion.identity);
-        newEnemy.tag = "enemy";
-
-
-        // Set Instance script info
-
 
         // Add enemy to list
         enemy.list.Add(newEnemy);
@@ -159,4 +159,6 @@ public class track : MonoBehaviour {
     {
         webTrack.completionTime -= damage;
     }
+
+
 }

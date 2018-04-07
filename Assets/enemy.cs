@@ -7,7 +7,6 @@ public class enemy : MonoBehaviour {
     public float damage = 10f;
     public float movementSpeed = 3.0f;
 
-
     // Use this for initialization
     void Start () {
 		
@@ -15,6 +14,7 @@ public class enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // Enemy Travel
         gameObject.transform.position = Vector3.Slerp(transform.position, 
                                         GameObject.FindGameObjectWithTag("Player").transform.position, 
                                         movementSpeed * Time.deltaTime);
