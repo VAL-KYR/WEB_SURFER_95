@@ -537,6 +537,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of 1728331... brought the assets for pick up items in and made them into prefabs
@@ -606,6 +607,8 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 >>>>>>> parent of 1728331... brought the assets for pick up items in and made them into prefabs
+=======
+>>>>>>> parent of 9ca6531... Moved some of the aesthetics from my scene into the VR scene
 --- !u!1 &2028246155
 GameObject:
   m_ObjectHideFlags: 0
