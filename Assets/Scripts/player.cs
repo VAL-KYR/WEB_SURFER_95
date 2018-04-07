@@ -110,7 +110,7 @@ public class player : MonoBehaviour {
         // convert raw input with curve
         float returnSignal;
         if (movement.smoothSpeed)
-            returnSignal =  Mathf.Pow(inputSignal, movement.smoothAccel/1.0f);
+            returnSignal =  Mathf.Pow(inputSignal, movement.smoothAccel / 1.0f);
         else if (movement.lurchSpeed)
             returnSignal = Mathf.Pow(inputSignal, 1.0f / movement.smoothAccel);
         else

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - playerBody
   - enemy
+  - addTime
+  - speedBoost
+  - speedReduce
   layers:
   - Default
   - TransparentFX

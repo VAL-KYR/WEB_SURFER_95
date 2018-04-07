@@ -7,6 +7,9 @@ public class track : MonoBehaviour {
 
     public float startTime;
     public float enemyTime;
+    public float boostTime;
+    public float goodItemTime;
+    public float badItemTime;
 
     // Debug Management
     [System.Serializable]
@@ -30,8 +33,25 @@ public class track : MonoBehaviour {
         public float completionTime = 1000f;
         public float timeLeft;
         public string remainingTime;
+
+        public bool speedBoost = false;
+        public float speedBoostAmount = 1.10f;
+        public float speedBoostTime = 20f;
     }
     public mTrack webTrack = new mTrack();
+
+    // Item Laning Management
+    [System.Serializable]
+    public class mItems
+    {
+        public List<GameObject> lanes = new List<GameObject>();
+        public List<GameObject> goodTypes = new List<GameObject>();
+        public List<GameObject> badTypes = new List<GameObject>();
+        public float goodItemRate = 5.0f;
+        public float badItemRate = 2.0f;
+
+    }
+    public mItems item = new mItems();
 
     // Enemy Management
     [System.Serializable]
@@ -50,7 +70,7 @@ public class track : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // Create a goal line for the track
-        webTrack.finishLine.transform.position = new Vector3(0,0,webTrack.length);
+        webTrack.finishLine.transform.position = new Vector3(webTrack.finishLine.transform.position.z, webTrack.finishLine.transform.position.y, webTrack.length);
         webTrack.timeLeft = webTrack.completionTime;
         webTrack.remainingTime = clockTime(webTrack.timeLeft);
 
@@ -62,6 +82,9 @@ public class track : MonoBehaviour {
         enemy.spawnZone.AddComponent<SphereCollider>();
         enemy.spawnZone.GetComponent<SphereCollider>().radius = enemy.spawnRadius;
         enemy.spawnZone.GetComponent<SphereCollider>().isTrigger = true;
+
+        // Create the lanes for items
+
     }
 
     // Update is called once per frame
@@ -106,9 +129,37 @@ public class track : MonoBehaviour {
             else
             {
                 // Move Player
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x, 
-                                                            gameObject.transform.position.y,
-                                                            gameObject.transform.position.z + webTrack.playerSpeed);
+                if (webTrack.speedBoost)
+                    gameObject.transform.position = new Vector3(gameObject.transform.position.x, 
+                                                                gameObject.transform.position.y,
+                                                                gameObject.transform.position.z + webTrack.playerSpeed * webTrack.speedBoostAmount);
+                else
+                    gameObject.transform.position = new Vector3(gameObject.transform.position.x,
+                                                                gameObject.transform.position.y,
+                                                                gameObject.transform.position.z + webTrack.playerSpeed);
+
+                // Player boosting
+                if (webTrack.speedBoost)
+                {
+                    boostTime += Time.deltaTime;
+
+                    if (boostTime >= webTrack.speedBoostTime)
+                    {
+                        webTrack.speedBoost = false;
+                    }
+                }
+
+                // Spawn Items
+                if (goodItemTime >= item.goodItemRate)
+                {
+                    spawnGoodItem();
+                    goodItemTime = 0f;
+                }
+                if (badItemTime >= item.badItemRate)
+                {
+                    spawnBadItem();
+                    badItemTime = 0f;
+                }
 
                 // Spawn enemies
                 if (enemyTime >= enemy.spawnRate)
@@ -120,6 +171,7 @@ public class track : MonoBehaviour {
                 // Running time code
                 startTime += Time.deltaTime;
                 enemyTime += Time.deltaTime;
+                
 
                 // Send to timer
                 webTrack.timer.text = webTrack.remainingTime + " remaining";
@@ -140,6 +192,16 @@ public class track : MonoBehaviour {
         string time = hours + "h:" + minutes + "m:" + seconds + "s time";
 
         return time;
+    }
+
+    void spawnGoodItem()
+    {
+
+    }
+
+    void spawnBadItem()
+    {
+
     }
 
     void spawnEnemy()

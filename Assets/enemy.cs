@@ -14,6 +14,8 @@ public class enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        //// ENEMIES NEED MORE EFFECTIVE TRACKING / ATTACK MOVEMENT
         // Enemy Travel
         gameObject.transform.position = Vector3.Slerp(transform.position, 
                                         GameObject.FindGameObjectWithTag("Player").transform.position, 
