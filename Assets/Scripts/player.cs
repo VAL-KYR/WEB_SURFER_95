@@ -42,27 +42,47 @@ public class player : MonoBehaviour {
 	void Update () {
         
         // Side to Side Movement 
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetAxis("TouchLThumbstick") != 0)
         {
 
             if (debug.rawInput)
-                Debug.Log("Raw input value: " + Input.GetAxis("Horizontal"));
+                Debug.Log("Raw input value: " + Input.GetAxis("TouchLThumbstick"));
 
 
-            if ((Input.GetAxis("Horizontal") > 0 && transform.position.x < movement.boundRange))
+            if ((Input.GetAxis("TouchLThumbstick") > 0 && transform.position.x < movement.boundRange))
             {
-                transform.position = new Vector3(movement.speed * inputRecurve(Mathf.Abs(Input.GetAxis("Horizontal"))) + transform.position.x,
+                transform.position = new Vector3(movement.speed * inputRecurve(Mathf.Abs(Input.GetAxis("TouchLThumbstick"))) + transform.position.x,
                                                 transform.position.y,
-                                                transform.position.z);
+                                                transform.position.z); 
             }
 
-            if ((Input.GetAxis("Horizontal") < 0 && transform.position.x > -movement.boundRange))
+            if ((Input.GetAxis("TouchLThumbstick") < 0 && transform.position.x > -movement.boundRange))
             {
-                transform.position = new Vector3(-movement.speed * inputRecurve(Mathf.Abs(Input.GetAxis("Horizontal"))) + transform.position.x,
+                transform.position = new Vector3(-movement.speed * inputRecurve(Mathf.Abs(Input.GetAxis("TouchLThumbstick"))) + transform.position.x,
                                                 transform.position.y,
                                                 transform.position.z);
             }
             
+        }
+        else if (Input.GetAxis("TouchRThumbstick") != 0)
+        {
+            if (debug.rawInput)
+                Debug.Log("Raw input value: " + Input.GetAxis("TouchRThumbstick"));
+
+
+            if ((Input.GetAxis("TouchRThumbstick") > 0 && transform.position.x < movement.boundRange))
+            {
+                transform.position = new Vector3(movement.speed * inputRecurve(Mathf.Abs(Input.GetAxis("TouchRThumbstick"))) + transform.position.x,
+                                                transform.position.y,
+                                                transform.position.z);
+            }
+
+            if ((Input.GetAxis("TouchRThumbstick") < 0 && transform.position.x > -movement.boundRange))
+            {
+                transform.position = new Vector3(-movement.speed * inputRecurve(Mathf.Abs(Input.GetAxis("TouchRThumbstick"))) + transform.position.x,
+                                                transform.position.y,
+                                                transform.position.z);
+            }
         }
 
 

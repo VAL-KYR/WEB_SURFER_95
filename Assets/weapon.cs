@@ -21,6 +21,7 @@ public class weapon : MonoBehaviour {
         public GameObject model;
         public float damage = 10f;
         public int pierceNum = 0;
+        public float travelTime = 2.0f;
     }
     public mBullet bullet = new mBullet();
 
@@ -31,8 +32,7 @@ public class weapon : MonoBehaviour {
         public GameObject chamber;
         public string oculusFireButton;
         public float rateOfFire = 1.0f;
-        public float damage = 10f;
-        public int pierceNum = 0;
+        public float travelTime = 2.0f;
     }
     public mGun gun = new mGun();
 
@@ -45,6 +45,7 @@ public class weapon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 
         fireTime += Time.deltaTime;
 
@@ -60,7 +61,10 @@ public class weapon : MonoBehaviour {
     void Fire()
     {
         GameObject firedBullet;
-        //firedBullet = Instantiate(bullet.model, gun.chamber.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-        firedBullet = Instantiate(bullet.model, gun.chamber.transform.position, transform.rotation);
+        firedBullet = Instantiate(bullet.model, gun.chamber.transform.position, gun.chamber.transform.rotation);
+        firedBullet.GetComponent<bullet>().ballistics.gunOrigin = gameObject;
+        firedBullet.GetComponent<bullet>().ballistics.damage = bullet.damage;
+        firedBullet.GetComponent<bullet>().ballistics.pierceNum = bullet.pierceNum;
+        firedBullet.GetComponent<bullet>().ballistics.travelTime = bullet.travelTime;
     }
 }

@@ -295,12 +295,12 @@ MonoBehaviour:
     model: {fileID: 1868810305124876, guid: 10cce46da661f1b40b7f407bfd1ff3c5, type: 2}
     damage: 10
     pierceNum: 0
+    travelTime: 2
   gun:
     chamber: {fileID: 923922330}
     oculusFireButton: LIndexTrigger
     rateOfFire: 0.2
-    damage: 10
-    pierceNum: 0
+    travelTime: 2
 --- !u!1 &770857302
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,14 +521,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug:
-    rawInput: 0
+    rawInput: 1
     modInput: 0
     gizmos: 0
   movement:
     smoothSpeed: 1
     lurchSpeed: 0
     smoothAccel: 1.8
-    speed: 0.1
+    speed: 0.06
     boundRange: 15
 --- !u!4 &936307193
 Transform:
@@ -923,12 +923,12 @@ MonoBehaviour:
     model: {fileID: 1868810305124876, guid: 10cce46da661f1b40b7f407bfd1ff3c5, type: 2}
     damage: 10
     pierceNum: 0
+    travelTime: 2
   gun:
     chamber: {fileID: 1188276895}
     oculusFireButton: RIndexTrigger
     rateOfFire: 0.2
-    damage: 10
-    pierceNum: 0
+    travelTime: 2
 --- !u!1001 &1595196867
 Prefab:
   m_ObjectHideFlags: 0
