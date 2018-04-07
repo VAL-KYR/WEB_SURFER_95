@@ -154,4 +154,9 @@ public class track : MonoBehaviour {
         // Add enemy to list
         enemy.list.Add(newEnemy);
     }
+
+    public void timeDamage(float damage)
+    {
+        webTrack.completionTime -= damage;
+    }
 }

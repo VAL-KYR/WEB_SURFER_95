@@ -41,7 +41,7 @@ public class player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        playerStats.currentHealth = playerStats.maxHealth;
 	}
 	
 	// Update is called once per frame
@@ -121,4 +121,6 @@ public class player : MonoBehaviour {
 
         return returnSignal;
     }
+
+
 }
