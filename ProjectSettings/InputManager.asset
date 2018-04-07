@@ -422,7 +422,7 @@ InputManager:
     axis: 9
     joyNum: 0
   - serializedVersion: 3
-    m_Name: RPalmTrigger
+    m_Name: LPalmTrigger
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 

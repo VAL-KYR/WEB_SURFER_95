@@ -67,4 +67,14 @@ public class weapon : MonoBehaviour {
         firedBullet.GetComponent<bullet>().ballistics.pierceNum = bullet.pierceNum;
         firedBullet.GetComponent<bullet>().ballistics.travelTime = bullet.travelTime;
     }
+
+    private void OnDrawGizmos()
+    {
+        if (debug.gizmos)
+        {
+            // Camera look direction
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(gameObject.transform.position, gameObject.transform.forward * 100f);
+        }
+    }
 }

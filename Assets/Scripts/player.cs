@@ -18,6 +18,15 @@ public class player : MonoBehaviour {
     }
     public mDebug debug = new mDebug();
 
+    // Player Management
+    [System.Serializable]
+    public class mPlayer
+    {
+        public float maxHealth = 100f;
+        public float currentHealth;
+    }
+    public mPlayer playerStats = new mPlayer();
+
     // Movement Management
     [System.Serializable]
     public class Movement
@@ -29,9 +38,6 @@ public class player : MonoBehaviour {
         public float boundRange = 5f;
     }
     public Movement movement = new Movement();
-
-
-
 
     // Use this for initialization
     void Start () {
