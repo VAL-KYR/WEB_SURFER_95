@@ -44,6 +44,7 @@ public class track : MonoBehaviour {
     [System.Serializable]
     public class mItems
     {
+        public int numLanes = 3;
         public List<GameObject> lanes = new List<GameObject>();
         public List<GameObject> goodTypes = new List<GameObject>();
         public List<GameObject> badTypes = new List<GameObject>();
@@ -84,7 +85,7 @@ public class track : MonoBehaviour {
         enemy.spawnZone.GetComponent<SphereCollider>().isTrigger = true;
 
         // Create the lanes for items
-
+        createLanes();
     }
 
     // Update is called once per frame
@@ -192,6 +193,21 @@ public class track : MonoBehaviour {
         string time = hours + "h:" + minutes + "m:" + seconds + "s time";
 
         return time;
+    }
+
+    void createLanes()
+    {
+        //item.lanes = new List<GameObject>(item.numLanes);
+        for (int i = 0; i <= item.numLanes-1; i++)
+        {
+            item.lanes[i] = new GameObject();
+        }
+
+        for (int i = 1; i <= item.lanes.Count-1; i++)
+        {
+            item.lanes[i].transform.position = new Vector3((((gameObject.GetComponent<player>().movement.boundRange * 2f) * (1f / item.lanes.Count)) * i) - gameObject.GetComponent<player>().movement.boundRange, 0, 0);
+        }
+        
     }
 
     void spawnGoodItem()

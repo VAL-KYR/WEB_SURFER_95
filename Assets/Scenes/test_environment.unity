@@ -563,9 +563,16 @@ MonoBehaviour:
     speedBoostAmount: 1.4
     speedBoostTime: 5
   item:
-    lanes: []
-    goodTypes: []
-    badTypes: []
+    numLanes: 3
+    lanes:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    goodTypes:
+    - {fileID: 1120299863750092, guid: 9c14cf550903b3a4e99b3323f00827a7, type: 2}
+    - {fileID: 1124151448536846, guid: 24b570b693c451b4d893fbcd35feaf66, type: 2}
+    badTypes:
+    - {fileID: 1283764797682200, guid: 9952d3ded0d3946408de4d04a76a75ba, type: 2}
     goodItemRate: 5
     badItemRate: 2
   enemy:
