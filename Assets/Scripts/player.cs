@@ -18,6 +18,15 @@ public class player : MonoBehaviour {
     }
     public mDebug debug = new mDebug();
 
+    // Player Management
+    [System.Serializable]
+    public class mPlayer
+    {
+        public float maxHealth = 100f;
+        public float currentHealth;
+    }
+    public mPlayer playerStats = new mPlayer();
+
     // Movement Management
     [System.Serializable]
     public class Movement
@@ -30,12 +39,9 @@ public class player : MonoBehaviour {
     }
     public Movement movement = new Movement();
 
-
-
-
     // Use this for initialization
     void Start () {
-		
+        playerStats.currentHealth = playerStats.maxHealth;
 	}
 	
 	// Update is called once per frame
@@ -104,7 +110,7 @@ public class player : MonoBehaviour {
         // convert raw input with curve
         float returnSignal;
         if (movement.smoothSpeed)
-            returnSignal =  Mathf.Pow(inputSignal, movement.smoothAccel/1.0f);
+            returnSignal =  Mathf.Pow(inputSignal, movement.smoothAccel / 1.0f);
         else if (movement.lurchSpeed)
             returnSignal = Mathf.Pow(inputSignal, 1.0f / movement.smoothAccel);
         else
@@ -115,4 +121,6 @@ public class player : MonoBehaviour {
 
         return returnSignal;
     }
+
+
 }
