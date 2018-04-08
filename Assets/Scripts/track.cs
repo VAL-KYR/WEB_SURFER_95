@@ -198,16 +198,20 @@ public class track : MonoBehaviour {
     void createLanes()
     {
         //item.lanes = new List<GameObject>(item.numLanes);
-        for (int i = 0; i <= item.numLanes-1; i++)
+        for (int i = 0; i < item.numLanes; i++)
         {
             item.lanes[i] = new GameObject();
         }
-
-        for (int i = 1; i <= item.lanes.Count-1; i++)
+        /*
+        for (int i = 0; i < item.lanes.Count; i++)
         {
-            item.lanes[i].transform.position = new Vector3((((gameObject.GetComponent<player>().movement.boundRange * 2f) * (1f / item.lanes.Count)) * i) - gameObject.GetComponent<player>().movement.boundRange, 0, 0);
+            item.lanes[i].transform.position = new Vector3(-gameObject.GetComponent<player>().movement.boundRange, 0, 0);
         }
-        
+        */
+        item.lanes[0].transform.position = new Vector3(-gameObject.GetComponent<player>().movement.boundRange + 1f, 0, 0);
+        item.lanes[1].transform.position = new Vector3(0, 0, 0);
+        item.lanes[2].transform.position = new Vector3(gameObject.GetComponent<player>().movement.boundRange - 1f, 0, 0);
+
     }
 
     void spawnGoodItem()
