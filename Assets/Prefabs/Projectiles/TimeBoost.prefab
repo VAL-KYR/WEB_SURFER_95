@@ -71,9 +71,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4725690305938484}
   - component: {fileID: 65014587426493018}
+  - component: {fileID: 114840450161785314}
   m_Layer: 0
   m_Name: TimeBoost
-  m_TagString: Untagged
+  m_TagString: addTime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -188,7 +189,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1568099035617976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.42, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.079411164}
   m_Children:
   - {fileID: 4917053968388274}
@@ -472,3 +473,14 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114840450161785314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1568099035617976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fea2b1d895c4eb4eb71f3ff30da1a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

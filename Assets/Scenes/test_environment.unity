@@ -229,6 +229,30 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: item.badTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 1283764797682200, guid: 9952d3ded0d3946408de4d04a76a75ba,
+        type: 2}
+    - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: item.goodTypes.Array.data[1]
+      value: 
+      objectReference: {fileID: 1576429288258996, guid: 9acdb83b37d6d644699ce0cdd7b6e67d,
+        type: 2}
+    - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: item.goodTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 1568099035617976, guid: c5a73e758583f2e4590951b31f68563e,
+        type: 2}
+    - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: enemy.types.Array.data[0]
+      value: 
+      objectReference: {fileID: 1276604561944550, guid: 2fd1023ae8d6fb240b877f84da6b225a,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
   m_IsPrefabParent: 0

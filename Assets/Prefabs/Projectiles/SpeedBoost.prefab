@@ -37,9 +37,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4539286214055518}
   - component: {fileID: 65640745864241530}
+  - component: {fileID: 114059070655879012}
   m_Layer: 0
   m_Name: SpeedBoost
-  m_TagString: Untagged
+  m_TagString: speedBoost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,8 +215,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1576429288258996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.887, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.079411164}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 4485619704670836}
   - {fileID: 4288186291863742}
@@ -472,3 +473,14 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114059070655879012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1576429288258996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fea2b1d895c4eb4eb71f3ff30da1a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
