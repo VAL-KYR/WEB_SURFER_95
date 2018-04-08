@@ -10,6 +10,8 @@ public class track : MonoBehaviour {
     public float boostTime;
     public float goodItemTime;
     public float badItemTime;
+    public float slowTime;
+
 
     // Debug Management
     [System.Serializable]
@@ -25,6 +27,7 @@ public class track : MonoBehaviour {
     {
         public GameObject finishLine;
         public Text timer;
+        public Slider progressBar;
         public bool started = false;
         public bool goal = false;
         public bool finish = false;
@@ -37,6 +40,12 @@ public class track : MonoBehaviour {
         public bool speedBoost = false;
         public float speedBoostAmount = 1.10f;
         public float speedBoostTime = 20f;
+
+        public bool speedReduce = false;
+        public float speedReduceAmount = 0.70f;
+        public float speedReduceTime = 20f;
+
+        public float addTimeAmount = 10f;
     }
     public mTrack webTrack = new mTrack();
 
@@ -77,7 +86,7 @@ public class track : MonoBehaviour {
 
         // Create a spawnzone for enemies
         enemy.spawnZone = new GameObject();
-        enemy.spawnZone.name = "SpawnZone";
+        enemy.spawnZone.name = "EnemySpawnZone";
         enemy.spawnZone.transform.SetParent(gameObject.transform);
         enemy.spawnZone.transform.position = new Vector3(0, 0, enemy.spawnDistance);
         enemy.spawnZone.AddComponent<SphereCollider>();
@@ -130,10 +139,17 @@ public class track : MonoBehaviour {
             else
             {
                 // Move Player
+                // Speed up
                 if (webTrack.speedBoost)
                     gameObject.transform.position = new Vector3(gameObject.transform.position.x, 
                                                                 gameObject.transform.position.y,
                                                                 gameObject.transform.position.z + webTrack.playerSpeed * webTrack.speedBoostAmount);
+                // Slow down
+                else if (webTrack.speedReduce)
+                    gameObject.transform.position = new Vector3(gameObject.transform.position.x,
+                                                                gameObject.transform.position.y,
+                                                                gameObject.transform.position.z + webTrack.playerSpeed * webTrack.speedReduceAmount);
+                // Normal
                 else
                     gameObject.transform.position = new Vector3(gameObject.transform.position.x,
                                                                 gameObject.transform.position.y,
@@ -144,9 +160,24 @@ public class track : MonoBehaviour {
                 {
                     boostTime += Time.deltaTime;
 
+                    // end boost
                     if (boostTime >= webTrack.speedBoostTime)
                     {
                         webTrack.speedBoost = false;
+                        boostTime = 0f;
+                    }
+                }
+
+                // Player slowing
+                if (webTrack.speedReduce)
+                {
+                    slowTime += Time.deltaTime;
+
+                    // end slow
+                    if (slowTime >= webTrack.speedReduceTime)
+                    {
+                        webTrack.speedReduce = false;
+                        slowTime = 0f;
                     }
                 }
 
@@ -182,6 +213,9 @@ public class track : MonoBehaviour {
                 // Calculate time left
                 webTrack.timeLeft = webTrack.completionTime - startTime;
                 webTrack.remainingTime = clockTime(webTrack.timeLeft);
+
+                // Show Progress
+                webTrack.progressBar.value = gameObject.transform.position.z / webTrack.length;
             }
         }
     }
@@ -217,7 +251,11 @@ public class track : MonoBehaviour {
         item.lanes[2].transform.position = new Vector3(gameObject.GetComponent<player>().movement.boundRange - 1f, 0, enemy.spawnDistance);
 
         foreach (GameObject g in item.lanes)
+        {
             g.transform.SetParent(gameObject.transform);
+            g.name = "ItemSpawnZone";
+        }
+            
 
     }
 
@@ -239,6 +277,23 @@ public class track : MonoBehaviour {
         newBadItem = Instantiate(item.badTypes[newItemTypeIndex],
                                 item.lanes[laneChoice].transform.position,
                                 Quaternion.identity);
+    }
+
+    public void itemEffects(string effect)
+    {
+        if (effect == "speedBoost")
+        {
+            webTrack.speedBoost = true;
+        }
+        else if (effect == "addTime")
+        {
+            webTrack.completionTime +=  webTrack.addTimeAmount;
+        }
+        else if (effect == "speedReduce")
+        {
+            webTrack.speedReduce = true;
+        }
+        
     }
 
     void spawnEnemy()

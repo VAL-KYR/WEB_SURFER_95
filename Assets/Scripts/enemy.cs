@@ -19,7 +19,7 @@ public class enemy : MonoBehaviour {
         // Enemy Travel
         gameObject.transform.position = Vector3.Slerp(transform.position, 
                                         GameObject.FindGameObjectWithTag("Player").transform.position, 
-                                        movementSpeed * Time.deltaTime);
+                                        movementSpeed * (Time.deltaTime));
 	}
 
     private void OnTriggerEnter(Collider other)
