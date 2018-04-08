@@ -546,6 +546,7 @@ MonoBehaviour:
   boostTime: 0
   goodItemTime: 0
   badItemTime: 0
+  slowTime: 0
   debug:
     gizmos: 0
   webTrack:
@@ -562,6 +563,10 @@ MonoBehaviour:
     speedBoost: 0
     speedBoostAmount: 1.4
     speedBoostTime: 5
+    speedReduce: 0
+    speedReduceAmount: 0.7
+    speedReduceTime: 20
+    addTimeAmount: 10
   item:
     numLanes: 3
     lanes:
@@ -714,8 +719,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1241072003}
   - component: {fileID: 1241072002}
-  - component: {fileID: 1241072001}
   - component: {fileID: 1241072000}
+  - component: {fileID: 1241072001}
   m_Layer: 0
   m_Name: finishLine
   m_TagString: Untagged
@@ -755,20 +760,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1241072001
-MeshCollider:
+--- !u!65 &1241072001
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1241071999}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1241072002
 MeshFilter:
   m_ObjectHideFlags: 0
