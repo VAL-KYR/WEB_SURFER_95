@@ -1303,7 +1303,7 @@ MonoBehaviour:
     started: 0
     goal: 0
     finish: 0
-    length: 100
+    length: 200
     playerSpeed: 0.05
     completionTime: 240
     timeLeft: 0
@@ -1549,9 +1549,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.25
-  m_Height: 1
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: -1, z: 0}
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!222 &222000032342747274
 CanvasRenderer:
   m_ObjectHideFlags: 1
