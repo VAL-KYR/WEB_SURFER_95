@@ -27,6 +27,7 @@ public class track : MonoBehaviour {
     {
         public GameObject finishLine;
         public Text timer;
+        public Slider progressBar;
         public bool started = false;
         public bool goal = false;
         public bool finish = false;
@@ -212,6 +213,9 @@ public class track : MonoBehaviour {
                 // Calculate time left
                 webTrack.timeLeft = webTrack.completionTime - startTime;
                 webTrack.remainingTime = clockTime(webTrack.timeLeft);
+
+                // Show Progress
+                webTrack.progressBar.value = gameObject.transform.position.z / webTrack.length;
             }
         }
     }
