@@ -239,13 +239,13 @@ Prefab:
         type: 2}
       propertyPath: item.goodTypes.Array.data[1]
       value: 
-      objectReference: {fileID: 1576429288258996, guid: 9acdb83b37d6d644699ce0cdd7b6e67d,
+      objectReference: {fileID: 1525828964480880, guid: eb896397afadf274aa171c208a31a78a,
         type: 2}
     - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
         type: 2}
       propertyPath: item.goodTypes.Array.data[0]
       value: 
-      objectReference: {fileID: 1568099035617976, guid: c5a73e758583f2e4590951b31f68563e,
+      objectReference: {fileID: 1454801335838274, guid: 2390c4448064d0141acf5a4ca390b9bc,
         type: 2}
     - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
         type: 2}
