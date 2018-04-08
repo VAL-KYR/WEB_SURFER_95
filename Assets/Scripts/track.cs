@@ -172,7 +172,9 @@ public class track : MonoBehaviour {
                 // Running time code
                 startTime += Time.deltaTime;
                 enemyTime += Time.deltaTime;
-                
+                goodItemTime += Time.deltaTime;
+                badItemTime += Time.deltaTime;
+
 
                 // Send to timer
                 webTrack.timer.text = webTrack.remainingTime + " remaining";
@@ -208,20 +210,35 @@ public class track : MonoBehaviour {
             item.lanes[i].transform.position = new Vector3(-gameObject.GetComponent<player>().movement.boundRange, 0, 0);
         }
         */
-        item.lanes[0].transform.position = new Vector3(-gameObject.GetComponent<player>().movement.boundRange + 1f, 0, 0);
-        item.lanes[1].transform.position = new Vector3(0, 0, 0);
-        item.lanes[2].transform.position = new Vector3(gameObject.GetComponent<player>().movement.boundRange - 1f, 0, 0);
+
+        // Move Into Position
+        item.lanes[0].transform.position = new Vector3(-gameObject.GetComponent<player>().movement.boundRange + 1f, 0, enemy.spawnDistance);
+        item.lanes[1].transform.position = new Vector3(0, 0, enemy.spawnDistance);
+        item.lanes[2].transform.position = new Vector3(gameObject.GetComponent<player>().movement.boundRange - 1f, 0, enemy.spawnDistance);
+
+        foreach (GameObject g in item.lanes)
+            g.transform.SetParent(gameObject.transform);
 
     }
 
     void spawnGoodItem()
     {
-
+        int laneChoice = (int)Random.RandomRange(0, item.numLanes-1);
+        GameObject newGoodItem;
+        int newItemTypeIndex = (int)Random.Range(0, enemy.types.Count);
+        newGoodItem = Instantiate(item.goodTypes[newItemTypeIndex],
+                                item.lanes[laneChoice].transform.position,
+                                Quaternion.identity);
     }
 
     void spawnBadItem()
     {
-
+        int laneChoice = (int)Random.RandomRange(0, item.numLanes - 1);
+        GameObject newBadItem;
+        int newItemTypeIndex = (int)Random.Range(0, item.badTypes.Count);
+        newBadItem = Instantiate(item.badTypes[newItemTypeIndex],
+                                item.lanes[laneChoice].transform.position,
+                                Quaternion.identity);
     }
 
     void spawnEnemy()
