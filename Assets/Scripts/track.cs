@@ -28,6 +28,8 @@ public class track : MonoBehaviour {
         public GameObject finishLine;
         public Text timer;
         public Slider progressBar;
+        public Image speedIndicator;
+        public List<Sprite> speedSprites = new List<Sprite>(3);
         public bool started = false;
         public bool goal = false;
         public bool finish = false;
@@ -159,6 +161,7 @@ public class track : MonoBehaviour {
                 if (webTrack.speedBoost)
                 {
                     boostTime += Time.deltaTime;
+                    webTrack.speedIndicator.sprite = webTrack.speedSprites[2];
 
                     // end boost
                     if (boostTime >= webTrack.speedBoostTime)
@@ -169,9 +172,10 @@ public class track : MonoBehaviour {
                 }
 
                 // Player slowing
-                if (webTrack.speedReduce)
+                else if (webTrack.speedReduce)
                 {
                     slowTime += Time.deltaTime;
+                    webTrack.speedIndicator.sprite = webTrack.speedSprites[0];
 
                     // end slow
                     if (slowTime >= webTrack.speedReduceTime)
@@ -179,6 +183,12 @@ public class track : MonoBehaviour {
                         webTrack.speedReduce = false;
                         slowTime = 0f;
                     }
+                }
+
+                // Player normal Speed indicator
+                else
+                {
+                    webTrack.speedIndicator.sprite = webTrack.speedSprites[1];
                 }
 
                 // Spawn Items
@@ -246,9 +256,12 @@ public class track : MonoBehaviour {
         */
 
         // Move Into Position
-        item.lanes[0].transform.position = new Vector3(-gameObject.GetComponent<player>().movement.boundRange + 1f, 0, enemy.spawnDistance);
-        item.lanes[1].transform.position = new Vector3(0, 0, enemy.spawnDistance);
-        item.lanes[2].transform.position = new Vector3(gameObject.GetComponent<player>().movement.boundRange - 1f, 0, enemy.spawnDistance);
+        item.lanes[0].transform.position = new Vector3(-gameObject.GetComponent<player>().movement.boundRange + 1f, 
+                                                        0, enemy.spawnDistance);
+        item.lanes[1].transform.position = new Vector3(0, 
+                                                        0, enemy.spawnDistance);
+        item.lanes[2].transform.position = new Vector3(gameObject.GetComponent<player>().movement.boundRange - 1f, 
+                                                        0, enemy.spawnDistance);
 
         foreach (GameObject g in item.lanes)
         {
