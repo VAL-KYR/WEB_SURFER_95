@@ -199,35 +199,35 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4460851452114162, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
+    - target: {fileID: 4364694092101408, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
       propertyPath: m_LocalPosition.x
       value: -1.69
       objectReference: {fileID: 0}
-    - target: {fileID: 4460851452114162, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
+    - target: {fileID: 4364694092101408, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
       propertyPath: m_LocalPosition.y
       value: -0.11
       objectReference: {fileID: 0}
-    - target: {fileID: 4460851452114162, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
+    - target: {fileID: 4364694092101408, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0.64
       objectReference: {fileID: 0}
-    - target: {fileID: 4460851452114162, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
+    - target: {fileID: 4364694092101408, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4460851452114162, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
+    - target: {fileID: 4364694092101408, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4460851452114162, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
+    - target: {fileID: 4364694092101408, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4460851452114162, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
+    - target: {fileID: 4364694092101408, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4460851452114162, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
+    - target: {fileID: 4364694092101408, guid: e1299a6483606554ebf8e38ce3e0772e, type: 2}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
