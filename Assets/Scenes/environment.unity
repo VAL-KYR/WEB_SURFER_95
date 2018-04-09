@@ -4656,7 +4656,7 @@ Prefab:
     - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
         type: 2}
       propertyPath: item.badItemRate
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
         type: 2}
@@ -4666,6 +4666,96 @@ Prefab:
     - target: {fileID: 1159622202393420, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
       propertyPath: m_TagString
       value: board
+      objectReference: {fileID: 0}
+    - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: webTrack.completionTime
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 114148060610153836, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: gun.rateOfFire
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638308094272750, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: gun.rateOfFire
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: webTrack.speedReduceTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: webTrack.speedReduceAmount
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: enemy.spawnRate
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: webTrack.playerSpeed
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 114586252412744438, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: enemy.spawnDistance
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046084117548712, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046084117548712, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.026914
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046084117548712, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.1307832
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046084117548712, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.914142
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046084117548712, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2.1613193
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153992237306260, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153992237306260, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.026914
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153992237306260, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.1307832
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153992237306260, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.914142
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153992237306260, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2.1613193
+      objectReference: {fileID: 0}
+    - target: {fileID: 114685873267429870, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: movement.speed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 114685873267429870, guid: e10feef4af63e6640b041f3f8a345fe9,
+        type: 2}
+      propertyPath: movement.boundRange
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e10feef4af63e6640b041f3f8a345fe9, type: 2}
@@ -4944,7 +5034,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1984278139}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 80.5, z: 0}
+  m_LocalPosition: {x: 0, y: 88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 747663025}

@@ -34,7 +34,7 @@ public class track : MonoBehaviour {
         public bool goal = false;
         public bool finish = false;
         public float length = 50f;
-        public float playerSpeed = 0.5f;
+        public float playerSpeed = 0.05f;
         public float completionTime = 1000f;
         public float timeLeft;
         public string remainingTime;
@@ -90,7 +90,7 @@ public class track : MonoBehaviour {
         enemy.spawnZone = new GameObject();
         enemy.spawnZone.name = "EnemySpawnZone";
         enemy.spawnZone.transform.SetParent(gameObject.transform);
-        enemy.spawnZone.transform.position = new Vector3(0, 0, enemy.spawnDistance);
+        enemy.spawnZone.transform.position = new Vector3(0, 5f, enemy.spawnDistance);
         enemy.spawnZone.AddComponent<SphereCollider>();
         enemy.spawnZone.GetComponent<SphereCollider>().radius = enemy.spawnRadius;
         enemy.spawnZone.GetComponent<SphereCollider>().isTrigger = true;
@@ -157,8 +157,14 @@ public class track : MonoBehaviour {
                                                                 gameObject.transform.position.y,
                                                                 gameObject.transform.position.z + webTrack.playerSpeed);
 
-                // Player boosting
-                if (webTrack.speedBoost)
+                // Move Lane item placers
+                foreach (GameObject g in item.lanes)
+                {
+                    g.transform.position = new Vector3(g.transform.position.x, g.transform.position.y, enemy.spawnDistance + gameObject.transform.position.z);
+                }
+
+                    // Player boosting
+                    if (webTrack.speedBoost)
                 {
                     boostTime += Time.deltaTime;
                     webTrack.speedIndicator.sprite = webTrack.speedSprites[2];
@@ -248,12 +254,6 @@ public class track : MonoBehaviour {
         {
             item.lanes[i] = new GameObject();
         }
-        /*
-        for (int i = 0; i < item.lanes.Count; i++)
-        {
-            item.lanes[i].transform.position = new Vector3(-gameObject.GetComponent<player>().movement.boundRange, 0, 0);
-        }
-        */
 
         // Move Into Position
         item.lanes[0].transform.position = new Vector3(-gameObject.GetComponent<player>().movement.boundRange + 1f, 
@@ -265,7 +265,6 @@ public class track : MonoBehaviour {
 
         foreach (GameObject g in item.lanes)
         {
-            g.transform.SetParent(gameObject.transform);
             g.name = "ItemSpawnZone";
         }
             
