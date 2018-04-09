@@ -274,20 +274,20 @@ public class track : MonoBehaviour {
 
     void spawnGoodItem()
     {
-        int laneChoice = (int)Random.RandomRange(0, item.numLanes-1);
+        int laneChoice = (int)Random.RandomRange(0, item.numLanes);
         GameObject newGoodItem;
-        int newItemTypeIndex = (int)Random.Range(0, enemy.types.Count);
-        newGoodItem = Instantiate(item.goodTypes[newItemTypeIndex],
+        int newGoodItemTypeIndex = (int)Random.Range(0, item.goodTypes.Count);
+        newGoodItem = Instantiate(item.goodTypes[newGoodItemTypeIndex],
                                 item.lanes[laneChoice].transform.position,
                                 Quaternion.identity);
     }
 
     void spawnBadItem()
     {
-        int laneChoice = (int)Random.RandomRange(0, item.numLanes - 1);
+        int laneChoice = (int)Random.RandomRange(0, item.numLanes);
         GameObject newBadItem;
-        int newItemTypeIndex = (int)Random.Range(0, item.badTypes.Count);
-        newBadItem = Instantiate(item.badTypes[newItemTypeIndex],
+        int newBadItemTypeIndex = (int)Random.Range(0, item.badTypes.Count);
+        newBadItem = Instantiate(item.badTypes[newBadItemTypeIndex],
                                 item.lanes[laneChoice].transform.position,
                                 Quaternion.identity);
     }
