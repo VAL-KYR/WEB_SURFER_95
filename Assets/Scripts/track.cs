@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class track : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class track : MonoBehaviour {
     public float badItemTime;
     public float slowTime;
 
+    public List<GameObject> environment = new List<GameObject>();
 
     // Debug Management
     [System.Serializable]
@@ -29,6 +31,7 @@ public class track : MonoBehaviour {
         public Text timer;
         public Slider progressBar;
         public Image speedIndicator;
+        public GameObject playerBody;
         public GameObject winObject;
         public GameObject loseObject;
         public List<Sprite> speedSprites = new List<Sprite>(3);
@@ -108,6 +111,10 @@ public class track : MonoBehaviour {
         {
             webTrack.started = true;
         }
+        else if ((Input.GetAxis("LPalmTrigger") > 0.5f && Input.GetAxis("RPalmTrigger") > 0.5f) && webTrack.started && webTrack.finish)
+        {
+            SceneManager.LoadScene("environment");
+        }
 
         // Track game running
         if (webTrack.started)
@@ -132,11 +139,15 @@ public class track : MonoBehaviour {
                 {
                     Debug.Log("Player wins with: " + webTrack.remainingTime);
                     webTrack.winObject.SetActive(true);
+                    webTrack.playerBody.SetActive(false);
                 }
                 else
                 {
                     Debug.Log("Player lost");
                     webTrack.loseObject.SetActive(true);
+                    webTrack.playerBody.SetActive(false);
+
+                    gameEnd();
                 }
 
             }
@@ -328,6 +339,20 @@ public class track : MonoBehaviour {
     public void timeDamage(float damage)
     {
         webTrack.completionTime -= damage;
+        gameObject.GetComponent<AudioSource>().pitch = Random.RandomRange(0.8f, 1.2f);
+        gameObject.GetComponent<AudioSource>().Play();
+    }
+
+    public void gameEnd()
+    {
+        foreach (GameObject g in environment)
+        {
+            g.AddComponent<Rigidbody>();
+            g.GetComponent<Rigidbody>().useGravity = true;
+            g.GetComponent<Rigidbody>().AddForce(new Vector3(Random.RandomRange(5,-5f), 
+                                                            Random.RandomRange(5, -5f), 
+                                                            Random.RandomRange(5, -5f)));
+        }
     }
 
 
