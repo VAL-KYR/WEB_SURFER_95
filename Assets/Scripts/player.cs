@@ -1,12 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
-[System.Serializable]
 public class player : MonoBehaviour {
-
-
 
     // Debug Management
     [System.Serializable]
