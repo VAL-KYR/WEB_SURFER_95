@@ -61,6 +61,8 @@ public class track : MonoBehaviour {
     public class mItems
     {
         public int numLanes = 3;
+        public GameObject goodSound;
+        public GameObject badSound;
         public List<GameObject> lanes = new List<GameObject>();
         public List<GameObject> goodTypes = new List<GameObject>();
         public List<GameObject> badTypes = new List<GameObject>();
@@ -107,10 +109,18 @@ public class track : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetAxis("LPalmTrigger") > 0.5f && Input.GetAxis("RPalmTrigger") > 0.5f) && !webTrack.started && !webTrack.finish)
+        if (!webTrack.started && !webTrack.finish)
         {
-            webTrack.started = true;
+            // Send to timer
+            webTrack.timer.text = "Hold Both PalmTriggers to begin surfing the web!";
+
+            if ((Input.GetAxis("LPalmTrigger") > 0.5f && Input.GetAxis("RPalmTrigger") > 0.5f))
+            {
+                webTrack.started = true;
+            }
         }
+
+       
         else if ((Input.GetAxis("LPalmTrigger") > 0.5f && Input.GetAxis("RPalmTrigger") > 0.5f) && webTrack.started && webTrack.finish)
         {
             SceneManager.LoadScene("environment");
@@ -127,8 +137,6 @@ public class track : MonoBehaviour {
                 webTrack.goal = true;
             }
             
-            // ADD TO COMPLETION TIME WITH POWERUPS
-            
             // End Sceneario
             if (webTrack.timeLeft <= 0f || webTrack.goal)
             {
@@ -137,13 +145,21 @@ public class track : MonoBehaviour {
                 // conditions for win/loss
                 if (webTrack.goal)
                 {
-                    Debug.Log("Player wins with: " + webTrack.remainingTime);
+                    Debug.Log("You won with: " + webTrack.remainingTime);
+
+                    // Send to timer
+                    webTrack.timer.text = "You won with: " + webTrack.remainingTime + " left!";
+
                     webTrack.winObject.SetActive(true);
                     webTrack.playerBody.SetActive(false);
                 }
                 else
                 {
                     Debug.Log("Player lost");
+
+                    // Send to timer
+                    webTrack.timer.text = "Mom used phone, it's super effective! You Lose!";
+
                     webTrack.loseObject.SetActive(true);
                     webTrack.playerBody.SetActive(false);
 
@@ -310,14 +326,17 @@ public class track : MonoBehaviour {
     {
         if (effect == "speedBoost")
         {
+            item.goodSound.GetComponent<AudioSource>().Play();
             webTrack.speedBoost = true;
         }
         else if (effect == "addTime")
         {
+            item.goodSound.GetComponent<AudioSource>().Play();
             webTrack.completionTime +=  webTrack.addTimeAmount;
         }
         else if (effect == "speedReduce")
         {
+            item.badSound.GetComponent<AudioSource>().Play();
             webTrack.speedReduce = true;
         }
         
