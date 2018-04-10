@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 23048975748223832}
   m_Layer: 0
   m_Name: board
-  m_TagString: Untagged
+  m_TagString: board
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -496,8 +496,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1860731803431024}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.072559, z: 0.032391}
-  m_LocalScale: {x: 0.8565545, y: 0.6924518, z: 1.6371738}
+  m_LocalPosition: {x: 0, y: -0.02, z: 0.026914}
+  m_LocalScale: {x: 1.1307832, y: 0.914142, z: 2.1613193}
   m_Children:
   - {fileID: 224325378735457342}
   - {fileID: 4442370330683162}
@@ -511,8 +511,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1353392793491420}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.072559, z: 0.032391}
-  m_LocalScale: {x: 0.8565545, y: 0.6924518, z: 1.6371738}
+  m_LocalPosition: {x: -0, y: -0.02, z: 0.026914}
+  m_LocalScale: {x: 1.1307832, y: 0.914142, z: 2.1613193}
   m_Children:
   - {fileID: 224707141345379864}
   - {fileID: 4310104477429438}
@@ -1148,7 +1148,7 @@ MonoBehaviour:
   gun:
     chamber: {fileID: 1742938027056398}
     oculusFireButton: LIndexTrigger
-    rateOfFire: 0.2
+    rateOfFire: 0.7
     travelTime: 2
 --- !u!114 &114217889218327840
 MonoBehaviour:
@@ -1384,17 +1384,17 @@ MonoBehaviour:
     started: 0
     goal: 0
     finish: 0
-    length: 600
-    playerSpeed: 0.05
-    completionTime: 240
+    length: 850
+    playerSpeed: 0.06
+    completionTime: 160
     timeLeft: 0
     remainingTime: 
     speedBoost: 0
     speedBoostAmount: 1.8
     speedBoostTime: 5
     speedReduce: 0
-    speedReduceAmount: 0.7
-    speedReduceTime: 20
+    speedReduceAmount: 0.5
+    speedReduceTime: 5
     addTimeAmount: 10
   item:
     numLanes: 3
@@ -1407,15 +1407,15 @@ MonoBehaviour:
     - {fileID: 1525828964480880, guid: eb896397afadf274aa171c208a31a78a, type: 2}
     badTypes:
     - {fileID: 1283764797682200, guid: 9952d3ded0d3946408de4d04a76a75ba, type: 2}
-    goodItemRate: 2
-    badItemRate: 5
+    goodItemRate: 5
+    badItemRate: 2
   enemy:
     types:
     - {fileID: 1276604561944550, guid: 2fd1023ae8d6fb240b877f84da6b225a, type: 2}
     spawnZone: {fileID: 0}
-    spawnDistance: 60
+    spawnDistance: 70
     spawnRadius: 30
-    spawnRate: 1
+    spawnRate: 0.8
     list: []
 --- !u!114 &114596880324762596
 MonoBehaviour:
@@ -1486,7 +1486,7 @@ MonoBehaviour:
   gun:
     chamber: {fileID: 1080660011180696}
     oculusFireButton: RIndexTrigger
-    rateOfFire: 0.2
+    rateOfFire: 0.5
     travelTime: 2
 --- !u!114 &114685873267429870
 MonoBehaviour:
@@ -1510,7 +1510,7 @@ MonoBehaviour:
     smoothSpeed: 1
     lurchSpeed: 0
     smoothAccel: 1.8
-    speed: 0.06
+    speed: 0.05
     boundRange: 5
 --- !u!114 &114698973756811676
 MonoBehaviour:

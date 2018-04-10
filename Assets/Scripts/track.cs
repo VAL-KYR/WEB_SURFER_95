@@ -29,6 +29,8 @@ public class track : MonoBehaviour {
         public Text timer;
         public Slider progressBar;
         public Image speedIndicator;
+        public GameObject winObject;
+        public GameObject loseObject;
         public List<Sprite> speedSprites = new List<Sprite>(3);
         public bool started = false;
         public bool goal = false;
@@ -102,7 +104,7 @@ public class track : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetAxis("LPalmTrigger") < 0.5f && Input.GetAxis("RPalmTrigger") < 0.5f) && !webTrack.started && !webTrack.finish)
+        if ((Input.GetAxis("LPalmTrigger") > 0.5f && Input.GetAxis("RPalmTrigger") > 0.5f) && !webTrack.started && !webTrack.finish)
         {
             webTrack.started = true;
         }
@@ -129,10 +131,12 @@ public class track : MonoBehaviour {
                 if (webTrack.goal)
                 {
                     Debug.Log("Player wins with: " + webTrack.remainingTime);
+                    webTrack.winObject.SetActive(true);
                 }
                 else
                 {
                     Debug.Log("Player lost");
+                    webTrack.loseObject.SetActive(true);
                 }
 
             }
