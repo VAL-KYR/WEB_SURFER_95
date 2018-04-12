@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class track : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class track : MonoBehaviour {
     public float badItemTime;
     public float slowTime;
 
+    public List<GameObject> environment = new List<GameObject>();
 
     // Debug Management
     [System.Serializable]
@@ -29,12 +31,15 @@ public class track : MonoBehaviour {
         public Text timer;
         public Slider progressBar;
         public Image speedIndicator;
+        public GameObject playerBody;
+        public GameObject winObject;
+        public GameObject loseObject;
         public List<Sprite> speedSprites = new List<Sprite>(3);
         public bool started = false;
         public bool goal = false;
         public bool finish = false;
         public float length = 50f;
-        public float playerSpeed = 0.5f;
+        public float playerSpeed = 0.05f;
         public float completionTime = 1000f;
         public float timeLeft;
         public string remainingTime;
@@ -56,6 +61,8 @@ public class track : MonoBehaviour {
     public class mItems
     {
         public int numLanes = 3;
+        public GameObject goodSound;
+        public GameObject badSound;
         public List<GameObject> lanes = new List<GameObject>();
         public List<GameObject> goodTypes = new List<GameObject>();
         public List<GameObject> badTypes = new List<GameObject>();
@@ -90,7 +97,7 @@ public class track : MonoBehaviour {
         enemy.spawnZone = new GameObject();
         enemy.spawnZone.name = "EnemySpawnZone";
         enemy.spawnZone.transform.SetParent(gameObject.transform);
-        enemy.spawnZone.transform.position = new Vector3(0, 0, enemy.spawnDistance);
+        enemy.spawnZone.transform.position = new Vector3(0, 5f, enemy.spawnDistance);
         enemy.spawnZone.AddComponent<SphereCollider>();
         enemy.spawnZone.GetComponent<SphereCollider>().radius = enemy.spawnRadius;
         enemy.spawnZone.GetComponent<SphereCollider>().isTrigger = true;
@@ -102,9 +109,21 @@ public class track : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetAxis("LPalmTrigger") < 0.5f && Input.GetAxis("RPalmTrigger") < 0.5f) && !webTrack.started && !webTrack.finish)
+        if (!webTrack.started && !webTrack.finish)
         {
-            webTrack.started = true;
+            // Send to timer
+            webTrack.timer.text = "Hold Both PalmTriggers to begin surfing the web!";
+
+            if ((Input.GetAxis("LPalmTrigger") > 0.5f && Input.GetAxis("RPalmTrigger") > 0.5f))
+            {
+                webTrack.started = true;
+            }
+        }
+
+       
+        else if ((Input.GetAxis("LPalmTrigger") > 0.5f && Input.GetAxis("RPalmTrigger") > 0.5f) && webTrack.started && webTrack.finish)
+        {
+            SceneManager.LoadScene("environment");
         }
 
         // Track game running
@@ -118,8 +137,6 @@ public class track : MonoBehaviour {
                 webTrack.goal = true;
             }
             
-            // ADD TO COMPLETION TIME WITH POWERUPS
-            
             // End Sceneario
             if (webTrack.timeLeft <= 0f || webTrack.goal)
             {
@@ -128,11 +145,25 @@ public class track : MonoBehaviour {
                 // conditions for win/loss
                 if (webTrack.goal)
                 {
-                    Debug.Log("Player wins with: " + webTrack.remainingTime);
+                    Debug.Log("You won with: " + webTrack.remainingTime);
+
+                    // Send to timer
+                    webTrack.timer.text = "You won with: " + webTrack.remainingTime + " left!";
+
+                    webTrack.winObject.SetActive(true);
+                    webTrack.playerBody.SetActive(false);
                 }
                 else
                 {
                     Debug.Log("Player lost");
+
+                    // Send to timer
+                    webTrack.timer.text = "Mom used phone, it's super effective! You Lose!";
+
+                    webTrack.loseObject.SetActive(true);
+                    webTrack.playerBody.SetActive(false);
+
+                    gameEnd();
                 }
 
             }
@@ -157,8 +188,14 @@ public class track : MonoBehaviour {
                                                                 gameObject.transform.position.y,
                                                                 gameObject.transform.position.z + webTrack.playerSpeed);
 
-                // Player boosting
-                if (webTrack.speedBoost)
+                // Move Lane item placers
+                foreach (GameObject g in item.lanes)
+                {
+                    g.transform.position = new Vector3(g.transform.position.x, g.transform.position.y, enemy.spawnDistance + gameObject.transform.position.z);
+                }
+
+                    // Player boosting
+                    if (webTrack.speedBoost)
                 {
                     boostTime += Time.deltaTime;
                     webTrack.speedIndicator.sprite = webTrack.speedSprites[2];
@@ -248,12 +285,6 @@ public class track : MonoBehaviour {
         {
             item.lanes[i] = new GameObject();
         }
-        /*
-        for (int i = 0; i < item.lanes.Count; i++)
-        {
-            item.lanes[i].transform.position = new Vector3(-gameObject.GetComponent<player>().movement.boundRange, 0, 0);
-        }
-        */
 
         // Move Into Position
         item.lanes[0].transform.position = new Vector3(-gameObject.GetComponent<player>().movement.boundRange + 1f, 
@@ -265,7 +296,6 @@ public class track : MonoBehaviour {
 
         foreach (GameObject g in item.lanes)
         {
-            g.transform.SetParent(gameObject.transform);
             g.name = "ItemSpawnZone";
         }
             
@@ -274,20 +304,20 @@ public class track : MonoBehaviour {
 
     void spawnGoodItem()
     {
-        int laneChoice = (int)Random.RandomRange(0, item.numLanes-1);
+        int laneChoice = (int)Random.RandomRange(0, item.numLanes);
         GameObject newGoodItem;
-        int newItemTypeIndex = (int)Random.Range(0, enemy.types.Count);
-        newGoodItem = Instantiate(item.goodTypes[newItemTypeIndex],
+        int newGoodItemTypeIndex = (int)Random.Range(0, item.goodTypes.Count);
+        newGoodItem = Instantiate(item.goodTypes[newGoodItemTypeIndex],
                                 item.lanes[laneChoice].transform.position,
                                 Quaternion.identity);
     }
 
     void spawnBadItem()
     {
-        int laneChoice = (int)Random.RandomRange(0, item.numLanes - 1);
+        int laneChoice = (int)Random.RandomRange(0, item.numLanes);
         GameObject newBadItem;
-        int newItemTypeIndex = (int)Random.Range(0, item.badTypes.Count);
-        newBadItem = Instantiate(item.badTypes[newItemTypeIndex],
+        int newBadItemTypeIndex = (int)Random.Range(0, item.badTypes.Count);
+        newBadItem = Instantiate(item.badTypes[newBadItemTypeIndex],
                                 item.lanes[laneChoice].transform.position,
                                 Quaternion.identity);
     }
@@ -296,14 +326,17 @@ public class track : MonoBehaviour {
     {
         if (effect == "speedBoost")
         {
+            item.goodSound.GetComponent<AudioSource>().Play();
             webTrack.speedBoost = true;
         }
         else if (effect == "addTime")
         {
+            item.goodSound.GetComponent<AudioSource>().Play();
             webTrack.completionTime +=  webTrack.addTimeAmount;
         }
         else if (effect == "speedReduce")
         {
+            item.badSound.GetComponent<AudioSource>().Play();
             webTrack.speedReduce = true;
         }
         
@@ -325,6 +358,20 @@ public class track : MonoBehaviour {
     public void timeDamage(float damage)
     {
         webTrack.completionTime -= damage;
+        gameObject.GetComponent<AudioSource>().pitch = Random.RandomRange(0.8f, 1.2f);
+        gameObject.GetComponent<AudioSource>().Play();
+    }
+
+    public void gameEnd()
+    {
+        foreach (GameObject g in environment)
+        {
+            g.AddComponent<Rigidbody>();
+            g.GetComponent<Rigidbody>().useGravity = true;
+            g.GetComponent<Rigidbody>().AddForce(new Vector3(Random.RandomRange(5,-5f), 
+                                                            Random.RandomRange(5, -5f), 
+                                                            Random.RandomRange(5, -5f)));
+        }
     }
 
 

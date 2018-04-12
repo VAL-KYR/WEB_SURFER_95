@@ -66,6 +66,9 @@ public class weapon : MonoBehaviour {
         firedBullet.GetComponent<bullet>().ballistics.damage = bullet.damage;
         firedBullet.GetComponent<bullet>().ballistics.pierceNum = bullet.pierceNum;
         firedBullet.GetComponent<bullet>().ballistics.travelTime = bullet.travelTime;
+
+        gameObject.GetComponent<AudioSource>().pitch = Random.RandomRange(0.8f, 1.2f);
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
     private void OnDrawGizmos()

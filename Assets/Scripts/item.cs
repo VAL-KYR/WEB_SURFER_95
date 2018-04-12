@@ -19,9 +19,9 @@ public class item : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("board"))
         {
-            other.GetComponent<track>().itemEffects(gameObject.tag);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<track>().itemEffects(gameObject.tag);
             Destroy(gameObject);
         }
     }
