@@ -14,6 +14,7 @@ public class track : MonoBehaviour {
     public float slowTime;
 
     public List<GameObject> environment = new List<GameObject>();
+    public GameObject sunset;
 
     // Debug Management
     [System.Serializable]
@@ -109,6 +110,7 @@ public class track : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        // Game start
         if (!webTrack.started && !webTrack.finish)
         {
             // Send to timer
@@ -120,7 +122,7 @@ public class track : MonoBehaviour {
             }
         }
 
-       
+        // Game restart
         else if ((Input.GetAxis("LPalmTrigger") > 0.5f && Input.GetAxis("RPalmTrigger") > 0.5f) && webTrack.started && webTrack.finish)
         {
             SceneManager.LoadScene("environment");
@@ -149,6 +151,12 @@ public class track : MonoBehaviour {
 
                     // Send to timer
                     webTrack.timer.text = "You won with: " + webTrack.remainingTime + " left!";
+
+                    sunset.AddComponent<Rigidbody>();
+                    sunset.GetComponent<Rigidbody>().useGravity = true;
+                    sunset.GetComponent<Rigidbody>().AddForce(new Vector3(Random.RandomRange(5, -5f),
+                                                                    Random.RandomRange(5, -5f),
+                                                                    Random.RandomRange(5, -5f)));
 
                     webTrack.winObject.SetActive(true);
                     webTrack.playerBody.SetActive(false);
