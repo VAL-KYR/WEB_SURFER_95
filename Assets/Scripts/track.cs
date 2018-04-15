@@ -12,6 +12,7 @@ public class track : MonoBehaviour {
     public float goodItemTime;
     public float badItemTime;
     public float slowTime;
+    public float restartTime = 0;
 
     public List<GameObject> environment = new List<GameObject>();
     public GameObject sunset;
@@ -44,6 +45,7 @@ public class track : MonoBehaviour {
         public float completionTime = 1000f;
         public float timeLeft;
         public string remainingTime;
+        public float timeUntilReset = 3.0f;
 
         public bool speedBoost = false;
         public float speedBoostAmount = 1.10f;
@@ -122,10 +124,34 @@ public class track : MonoBehaviour {
             }
         }
 
-        // Game restart
-        else if ((Input.GetAxis("LPalmTrigger") > 0.5f && Input.GetAxis("RPalmTrigger") > 0.5f) && webTrack.started && webTrack.finish)
+        // Game restart at end
+        if (webTrack.started && webTrack.finish)
         {
-            SceneManager.LoadScene("environment");
+            if (webTrack.timeLeft <= 0f || webTrack.goal)
+            {
+                if (webTrack.goal)
+                {
+                    // Send to timer
+                    webTrack.timer.text = "You won with: " + webTrack.remainingTime + " left!";
+                }
+                else
+                {
+                    // Send to timer
+                    webTrack.timer.text = "Mom used phone, it's super effective! You Lose!";
+                }
+
+            }
+
+            if (restartTime > webTrack.timeUntilReset)
+            {
+                webTrack.timer.text += "\n\n Press both palm triggers to restart.";
+
+                if ((Input.GetAxis("LPalmTrigger") > 0.5f && Input.GetAxis("RPalmTrigger") > 0.5f))
+                {
+                    SceneManager.LoadScene("environment");
+                }
+            }
+            
         }
 
         // Track game running
@@ -142,6 +168,9 @@ public class track : MonoBehaviour {
             // End Sceneario
             if (webTrack.timeLeft <= 0f || webTrack.goal)
             {
+
+                restartTime += Time.deltaTime;
+
                 webTrack.finish = true;
 
                 // conditions for win/loss
@@ -149,8 +178,7 @@ public class track : MonoBehaviour {
                 {
                     Debug.Log("You won with: " + webTrack.remainingTime);
 
-                    // Send to timer
-                    webTrack.timer.text = "You won with: " + webTrack.remainingTime + " left!";
+                    
 
                     sunset.AddComponent<Rigidbody>();
                     sunset.GetComponent<Rigidbody>().useGravity = true;
@@ -164,9 +192,6 @@ public class track : MonoBehaviour {
                 else
                 {
                     Debug.Log("Player lost");
-
-                    // Send to timer
-                    webTrack.timer.text = "Mom used phone, it's super effective! You Lose!";
 
                     webTrack.loseObject.SetActive(true);
                     webTrack.playerBody.SetActive(false);

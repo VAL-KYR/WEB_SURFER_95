@@ -345,7 +345,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: You've surfed the web, and had a rad adventure! Check your right floppy
-    gun for your time! Press both palm triggers to try again.
+    gun for your time!
 --- !u!222 &28009619
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1748,8 +1748,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Connection Failure. Check your right floppy gun for error report. Press
-    both palm triggers to try again.
+  m_Text: Connection Failure. Check your right floppy gun for error report.
 --- !u!222 &262893513
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2252,6 +2251,7 @@ MonoBehaviour:
   goodItemTime: 0
   badItemTime: 0
   slowTime: 0
+  restartTime: 0
   environment:
   - {fileID: 747663021}
   - {fileID: 202647200}
@@ -2336,6 +2336,7 @@ MonoBehaviour:
     completionTime: 160
     timeLeft: 0
     remainingTime: 
+    timeUntilReset: 5
     speedBoost: 0
     speedBoostAmount: 1.8
     speedBoostTime: 5
@@ -3213,8 +3214,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2000, y: 2000}
+  m_AnchoredPosition: {x: 0, y: 446}
+  m_SizeDelta: {x: 2000, y: 1500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &680289847
 CanvasRenderer:
@@ -3250,7 +3251,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 300
-    m_Alignment: 4
+    m_Alignment: 7
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
