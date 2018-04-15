@@ -371,6 +371,9 @@ public class track : MonoBehaviour {
         {
             item.badSound.GetComponent<AudioSource>().Play();
             webTrack.speedReduce = true;
+
+            /// Controller BUZZ
+            StartCoroutine(Vibrate(item.badSound.GetComponent<AudioSource>()));
         }
         
     }
@@ -393,6 +396,9 @@ public class track : MonoBehaviour {
         webTrack.completionTime -= damage;
         gameObject.GetComponent<AudioSource>().pitch = Random.RandomRange(0.8f, 1.2f);
         gameObject.GetComponent<AudioSource>().Play();
+
+        /// Controller BUZZ
+        StartCoroutine(Vibrate(gameObject.GetComponent<AudioSource>()));
     }
 
     public void gameEnd()
@@ -405,6 +411,14 @@ public class track : MonoBehaviour {
                                                             Random.RandomRange(5, -5f), 
                                                             Random.RandomRange(5, -5f)));
         }
+    }
+
+    IEnumerator Vibrate(AudioSource other)
+    {
+        OVRHaptics.LeftChannel.Preempt(new OVRHapticsClip(other.clip));
+        OVRHaptics.RightChannel.Preempt(new OVRHapticsClip(other.clip));
+
+        yield return new WaitForSeconds(0.01f);
     }
 
 
