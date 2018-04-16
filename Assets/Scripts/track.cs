@@ -12,8 +12,10 @@ public class track : MonoBehaviour {
     public float goodItemTime;
     public float badItemTime;
     public float slowTime;
+    public float restartTime = 0;
 
     public List<GameObject> environment = new List<GameObject>();
+    public GameObject sunset;
 
     // Debug Management
     [System.Serializable]
@@ -43,6 +45,7 @@ public class track : MonoBehaviour {
         public float completionTime = 1000f;
         public float timeLeft;
         public string remainingTime;
+        public float timeUntilReset = 3.0f;
 
         public bool speedBoost = false;
         public float speedBoostAmount = 1.10f;
@@ -109,6 +112,7 @@ public class track : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        // Game start
         if (!webTrack.started && !webTrack.finish)
         {
             // Send to timer
@@ -120,10 +124,34 @@ public class track : MonoBehaviour {
             }
         }
 
-       
-        else if ((Input.GetAxis("LPalmTrigger") > 0.5f && Input.GetAxis("RPalmTrigger") > 0.5f) && webTrack.started && webTrack.finish)
+        // Game restart at end
+        if (webTrack.started && webTrack.finish)
         {
-            SceneManager.LoadScene("environment");
+            if (webTrack.timeLeft <= 0f || webTrack.goal)
+            {
+                if (webTrack.goal)
+                {
+                    // Send to timer
+                    webTrack.timer.text = "You won with: " + webTrack.remainingTime + " left!";
+                }
+                else
+                {
+                    // Send to timer
+                    webTrack.timer.text = "Mom used phone, it's super effective! You Lose!";
+                }
+
+            }
+
+            if (restartTime > webTrack.timeUntilReset)
+            {
+                webTrack.timer.text += "\n\n Press both palm triggers to restart.";
+
+                if ((Input.GetAxis("LPalmTrigger") > 0.5f && Input.GetAxis("RPalmTrigger") > 0.5f))
+                {
+                    SceneManager.LoadScene("environment");
+                }
+            }
+            
         }
 
         // Track game running
@@ -140,6 +168,9 @@ public class track : MonoBehaviour {
             // End Sceneario
             if (webTrack.timeLeft <= 0f || webTrack.goal)
             {
+
+                restartTime += Time.deltaTime;
+
                 webTrack.finish = true;
 
                 // conditions for win/loss
@@ -147,8 +178,13 @@ public class track : MonoBehaviour {
                 {
                     Debug.Log("You won with: " + webTrack.remainingTime);
 
-                    // Send to timer
-                    webTrack.timer.text = "You won with: " + webTrack.remainingTime + " left!";
+                    
+
+                    sunset.AddComponent<Rigidbody>();
+                    sunset.GetComponent<Rigidbody>().useGravity = true;
+                    sunset.GetComponent<Rigidbody>().AddForce(new Vector3(Random.RandomRange(5, -5f),
+                                                                    Random.RandomRange(5, -5f),
+                                                                    Random.RandomRange(5, -5f)));
 
                     webTrack.winObject.SetActive(true);
                     webTrack.playerBody.SetActive(false);
@@ -156,9 +192,6 @@ public class track : MonoBehaviour {
                 else
                 {
                     Debug.Log("Player lost");
-
-                    // Send to timer
-                    webTrack.timer.text = "Mom used phone, it's super effective! You Lose!";
 
                     webTrack.loseObject.SetActive(true);
                     webTrack.playerBody.SetActive(false);
@@ -338,6 +371,9 @@ public class track : MonoBehaviour {
         {
             item.badSound.GetComponent<AudioSource>().Play();
             webTrack.speedReduce = true;
+
+            /// Controller BUZZ
+            StartCoroutine(Vibrate(item.badSound.GetComponent<AudioSource>()));
         }
         
     }
@@ -360,6 +396,9 @@ public class track : MonoBehaviour {
         webTrack.completionTime -= damage;
         gameObject.GetComponent<AudioSource>().pitch = Random.RandomRange(0.8f, 1.2f);
         gameObject.GetComponent<AudioSource>().Play();
+
+        /// Controller BUZZ
+        StartCoroutine(Vibrate(gameObject.GetComponent<AudioSource>()));
     }
 
     public void gameEnd()
@@ -372,6 +411,14 @@ public class track : MonoBehaviour {
                                                             Random.RandomRange(5, -5f), 
                                                             Random.RandomRange(5, -5f)));
         }
+    }
+
+    IEnumerator Vibrate(AudioSource other)
+    {
+        OVRHaptics.LeftChannel.Preempt(new OVRHapticsClip(other.clip));
+        OVRHaptics.RightChannel.Preempt(new OVRHapticsClip(other.clip));
+
+        yield return new WaitForSeconds(0.01f);
     }
 
 
